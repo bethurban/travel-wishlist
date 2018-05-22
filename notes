@@ -1,0 +1,52 @@
+Travel wish list
+
+1. User logs in
+2. Homepage: Checklist of places she wants to go
+    - has link off to external site to find flights
+    Below that, sees list of places been
+    - All destinations link off to their own page with details
+3. Can check off place on wishlist and submit
+  - Takes user to destination's edit page, where she can add details and submit
+4. Reloads homepage, moves destination to list of places been
+5. Can click link to add destination to either list
+6. If wishlist, takes to new form with:
+  - Must: Destination
+  - Optional: Travel by date
+  - Optional: Travel partner
+  - Optional: Notes
+7. If place been, takes to new form with:
+  - Must: Destination
+  - Optional: Date traveled
+  - Optional: Travel partner
+  - Optional: Notes
+8. Form submission returns to homepage, destination added to appropriate list
+
+Models:
+User
+  - has_many places_wished
+  - has_many places_been
+  - has_secure_password
+  - validates :username, :presence => true
+  - validates :email, :presence => true
+PlacesWished
+ - belongs_to user
+ - validates :destination, :presence => true
+PlacesBeen
+  - belongs_to user
+  - validates :destination, :presence => true
+
+Routes:
+'/' - log in/create account - index.erb
+'/destinations' - user's homepage with checklist of places to go and list of places been
+  - destinations.erb - user can check off place and submit to move it to list of places been
+'/:slug' - detail page on each destination - show-destination.erb
+'/add-destination' - add a destination, choose 'want to go' or 'been there'
+  - create-destination.erb
+  post to: '/destinations' - goes on checklist if 'want to go', on list if 'been there'
+'/edit-destination' - edit destination - edit-destination.erb
+'/delete-destination' - deletes destination or trip, posts to '/destinations'
+
+Tables:
+User - username - string, email - string, password_digest - string
+PlacesWished - Destination - string, Travel by - datetime, travel partner - string, notes - string, timestamp - timestamp, user_id - integer
+PlacesBeen - Destination - string, Date traveled - string, travel partner - string, notes - string, user_id - integer
