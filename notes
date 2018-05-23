@@ -37,6 +37,8 @@ PlacesBeen
 
 Routes:
 '/' - log in/create account - index.erb
+'/signup' - sign up for account - users/create_user.erb
+'/login' - log into account - users/login.erb
 '/destinations' - user's homepage with checklist of places to go and list of places been
   - destinations.erb - user can check off place and submit to move it to list of places been
 '/:slug' - detail page on each destination - show-destination.erb
