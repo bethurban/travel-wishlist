@@ -17,9 +17,9 @@
 <br></br>
 
 <a href="/destinations/<%=@destination.id%>/edit">Edit this visited destination</a>
-<br>
+<br></br>
 <form action='/destinations/wish' method='post'>
-<input type="checkbox" name="destination" value="<%=@destination.destination%>">
+<input type="hidden" name="destination" value="<%=@destination.destination%>">
 <input type="submit" value="Move this destination back to your wishlist">
 </form>
 <br>
