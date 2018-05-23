@@ -1,7 +1,7 @@
 <h1>Welcome, <%= @user.username %></h1>
 
 <h3>Your Travel Destination Wishlist</h3>
-<em>Check off your latest journey and submit!</em>
+<em>Check off your latest journey and log it!</em>
 <br></br>
 <form action="/destinations/update" method="post">
   <% @wished_places.each do |wish| %>
@@ -9,7 +9,7 @@
     <br>
   <% end %>
   <br></br>
-  <input type="submit" id="submit">
+  <input type="submit" value="Log trip to wishlist destination">
 </form>
 
 <br>
@@ -24,9 +24,9 @@
     <br>
   <% end %>
 </ul>
-<br>
 <a href="/destinations/create">Log a new visited destination</a>
 
+<br></br>
 <br></br>
 
 <a href="/logout">Log out</a>
