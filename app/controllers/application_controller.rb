@@ -109,6 +109,7 @@ class ApplicationController < Sinatra::Base
 
   patch '/destinations/:id' do
     @destination = VisitedPlace.find_by_id(params[:id])
+    @destination.destination = params["destination"]
     @destination.date_traveled = params["date_traveled"]
     @destination.travel_partner = params["travel_partner"]
     @destination.notes = params["notes"]

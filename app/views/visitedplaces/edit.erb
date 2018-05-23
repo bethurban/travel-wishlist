@@ -8,6 +8,8 @@
 
 <form action="/destinations/<%= @destination.id%>" method="post">
   <input id="hidden" type="hidden" name="_method" value="patch">
+  Destination name: <input type="text" name="destination" value="<%=@destination.destination%>">
+  <br>
   Date traveled: <input type="date" name="date_traveled" value="<%=@destination.date_traveled%>">
   <br>
   Travel partner(s): <input type="text" name="travel_partner" value="<%=@destination.travel_partner%>">
