@@ -10,7 +10,19 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    erb :index
+    if Helpers.logged_in?(session)
+      redirect '/destinations'
+    else
+      erb :index
+    end
+  end
+
+  post '/' do
+
+  end
+
+  get '/destinations' do
+    erb :destinations
   end
 
 end
