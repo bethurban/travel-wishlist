@@ -7,19 +7,25 @@ Travel wish list
     - All destinations link off to their own page with details
 3. Can check off place on wishlist and submit
   - Takes user to destination's edit page, where she can add details and submit
-4. Reloads homepage, moves destination to list of places been
-5. Can click link to add destination to either list
-6. If wishlist, takes to new form with:
+4. Loads visited destination's detail page - link to return to homepage
+4. Goes back to homepage, destination moves to list of places been
+5. Can click link to add wished destination
+6. Takes user to destination edit page - add details and submit
+7. Goes back to homepage, destination appears on checked list of wished places
+
+Wishlist form:
   - Must: Destination
   - Optional: Travel by date
   - Optional: Travel partner
   - Optional: Notes
-7. If place been, takes to new form with:
+Visited form:
   - Must: Destination
   - Optional: Date traveled
   - Optional: Travel partner
   - Optional: Notes
-8. Form submission returns to homepage, destination added to appropriate list
+
+* Use create date for wished places - show on homepage and/or show page to show user when she added?
+* Use date traveled info for visited places on home page?
 
 Models:
 User
@@ -36,17 +42,24 @@ PlacesBeen
   - validates :destination, :presence => true
 
 Routes:
-'/' - log in/create account - index.erb
-'/signup' - sign up for account - users/create_user.erb
-'/login' - log into account - users/login.erb
-'/destinations' - user's homepage with checklist of places to go and list of places been
-  - destinations.erb - user can check off place and submit to move it to list of places been
-'/:slug' - detail page on each destination - show-destination.erb
-'/add-destination' - add a destination, choose 'want to go' or 'been there'
-  - create-destination.erb
-  post to: '/destinations' - goes on checklist if 'want to go', on list if 'been there'
-'/edit-destination' - edit destination - edit-destination.erb
-'/delete-destination' - deletes destination or trip, posts to '/destinations'
+X '/' - log in/create account - index.erb
+X '/signup' - sign up for account - users/create_user.erb
+X '/login' - log into account - users/login.erb
+X '/destinations' - user's homepage with checklist of places to go and list of places been
+  - users/destinations.erb - user can check off place and submit to move it to list of places been
+'/:id/delete' - deletes destination or trip, posts to '/destinations'
+
+VISITED DESTINATIONS
+
+'/destinations/:id' - detail page on each visited destination - /visitedplaces/show.erb
+'/destinations/create' - add a visited destination - /visitedplaces/create.erb
+  post to: '/destinations' - goes on list of 'been there'
+X '/destinations/:id/edit' - edit visited destination - visitedplaces/edit.erb
+
+WISHED DESTINATIONS
+'/destinations/wish/:id' - detail page on wished destination - /wishedplaces/show.erb
+'/destinations/wish/create' - add wished destination - /wishedplaces/create.erb
+'/destinations/wish/:id/edit' - edit wished destination /wishedplaces/edit.erb
 
 Tables:
 User - username - string, email - string, password_digest - string
