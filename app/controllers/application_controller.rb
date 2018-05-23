@@ -99,7 +99,6 @@ class ApplicationController < Sinatra::Base
   get '/destinations/:id' do
     @destination = VisitedPlace.find_by_id(params[:id])
     erb :'/visitedplaces/show'
-    #Fill out show.erb. Need to add folder to views to separate out visited and wished routes?
   end
 
 end

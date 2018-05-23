@@ -5,7 +5,7 @@
 <br></br>
 <form action="/destinations" method="post">
   <% @wished_places.each do |wish| %>
-    <input type="checkbox" name="visited_place" value="<%=wish.destination%>"><%=wish.destination%></input>
+    <input type="checkbox" name="visited_place" value="<%=wish.destination%>"><a href="/destinations/wish/<%=wish.id%>"><%=wish.destination%></a></input>
     <br>
   <% end %>
   <br></br>
@@ -18,7 +18,10 @@
 
 <ul>
   <% @visited_places.each do |visit| %>
-    <li><%= visit.destination %></li>
+    <li><a href="/destinations/<%= visit.id %>"><%= visit.destination %></a></li>
     <br>
   <% end %>
 </ul>
+
+<br></br>
+<a href="/logout">Log out</a>
