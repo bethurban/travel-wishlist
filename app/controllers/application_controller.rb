@@ -62,8 +62,8 @@ class ApplicationController < Sinatra::Base
   get '/destinations' do
     if Helpers.logged_in?(session)
       @user = Helpers.current_user(session)
-      @wished_places = WishedPlaces.all
-      @visited_places = VisitedPlaces.all
+      @wished_places = WishedPlace.all
+      @visited_places = VisitedPlace.all
       erb :'destinations/destinations'
     else
       redirect '/'

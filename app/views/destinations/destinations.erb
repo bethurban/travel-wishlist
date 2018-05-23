@@ -1,10 +1,14 @@
 <h1>Welcome, <%= @user.username %></h1>
 
 <h3>Your Travel Destination Wishlist</h3>
-
+<em>Check off your latest journey and submit!</em>
+<br></br>
 <% @wished_places.each do |wish| %>
   <input type="checkbox" name="wished_place" value="<%=wish.id%>"><%=wish.destination%></input>
+  <br>
 <% end %>
+<br></br>
+<input type="submit" id="submit">
 
 <br>
 
