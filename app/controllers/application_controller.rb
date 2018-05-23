@@ -82,6 +82,10 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/destinations/create' do
+    erb :'/visitedplaces/create'
+  end
+
   get '/destinations/:id/edit' do
     @destination = VisitedPlace.find_by_id(params[:id])
     erb :'/visitedplaces/edit'

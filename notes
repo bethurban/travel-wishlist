@@ -51,7 +51,7 @@ X '/destinations' - user's homepage with checklist of places to go and list of p
 
 VISITED DESTINATIONS
 
-'/destinations/:id' - detail page on each visited destination - /visitedplaces/show.erb
+X '/destinations/:id' - detail page on each visited destination - /visitedplaces/show.erb
 '/destinations/create' - add a visited destination - /visitedplaces/create.erb
   post to: '/destinations' - goes on list of 'been there'
 X '/destinations/:id/edit' - edit visited destination - visitedplaces/edit.erb

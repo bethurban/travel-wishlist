@@ -1,6 +1,6 @@
 <h1><%= @destination.destination %></h1>
 <br>
-<em>Nice work - you checked off a dream destination!</em>
+<!--<em>Nice work - you checked off a dream destination!</em>-->
 
 <br>
 
@@ -8,11 +8,11 @@
 
 <form action="/destinations/<%= @destination.id%>" method="post">
   <input id="hidden" type="hidden" name="_method" value="patch">
-  Date traveled: <input type="date" name="date_traveled">
+  Date traveled: <input type="date" name="date_traveled" value="<%=@destination.date_traveled%>">
   <br>
-  Travel partner(s): <input type="text" name="travel_partner">
+  Travel partner(s): <input type="text" name="travel_partner" value="<%=@destination.travel_partner%>">
   <br>
-  Notes: <input type="text" name="notes">
+  Notes: <input type="text" name="notes" value="<%=@destination.notes%>">
   <br></br>
   <input type="submit" value="submit">
 </form>
