@@ -100,8 +100,9 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/destinations/:id/edit' do
-    if Helpers.logged_in?(session)
-      @destination = VisitedPlace.find_by_id(params[:id])
+    @user = Helpers.current_user(session)
+    @destination = VisitedPlace.find_by_id(params[:id])
+    if Helpers.logged_in?(session) && @user.id == @destination.user_id
       erb :'/visitedplaces/edit'
     else
       redirect '/'
@@ -171,8 +172,9 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/destinations/wish/:id/edit' do
-    if Helpers.logged_in?(session)
-      @destination = WishedPlace.find_by_id(params[:id])
+    @destination = WishedPlace.find_by_id(params[:id])
+    @user = Helpers.current_user(session)
+    if Helpers.logged_in?(session) && @user.id == @destination.user_id
       erb :'/wishedplaces/edit'
     else
       redirect '/'
