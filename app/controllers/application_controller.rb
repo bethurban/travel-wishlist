@@ -121,4 +121,9 @@ class ApplicationController < Sinatra::Base
     erb :'/visitedplaces/show'
   end
 
+  get '/destinations/wish/:id' do
+    @destination = WishedPlace.find_by_id(params[:id])
+    erb :'/wishedplaces/show'
+  end
+
 end

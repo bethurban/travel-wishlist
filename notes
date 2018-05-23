@@ -45,15 +45,15 @@ Routes:
 X '/' - log in/create account - index.erb
 X '/signup' - sign up for account - users/create_user.erb
 X '/login' - log into account - users/login.erb
-X '/destinations' - user's homepage with checklist of places to go and list of places been
+X '/destinations' - userd's homepage with checklist of places to go and list of places been
   - users/destinations.erb - user can check off place and submit to move it to list of places been
 '/:id/delete' - deletes destination or trip, posts to '/destinations'
 
 VISITED DESTINATIONS
 
 X '/destinations/:id' - detail page on each visited destination - /visitedplaces/show.erb
-'/destinations/create' - add a visited destination - /visitedplaces/create.erb
-  post to: '/destinations' - goes on list of 'been there'
+X '/destinations/create' - add a visited destination - /visitedplaces/create.erb
+X  post to: '/destinations' - goes on list of 'been there'
 X '/destinations/:id/edit' - edit visited destination - visitedplaces/edit.erb
 
 WISHED DESTINATIONS

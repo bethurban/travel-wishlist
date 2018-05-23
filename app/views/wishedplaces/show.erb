@@ -1,0 +1,19 @@
+<h1>On the wishlist: <%= @destination.destination %></h1>
+
+<% if @destination.travel_by %>
+  <h3>I want to travel here by: <%= @destination.travel_by %></h3>
+<% end %>
+
+<% if @destination.travel_partner %>
+  <h4>Travel partner: </h4><%= @destination.travel_partner %>
+<% end %>
+
+<% if @destination.notes %>
+  <h4>Notes: </h4><%= @destination.notes %>
+<% end %>
+
+<br></br>
+
+<a href="/destinations">Back to homepage</a>
+<br>
+<a href="/logout">Log out</a>
