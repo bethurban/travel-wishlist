@@ -132,4 +132,14 @@ class ApplicationController < Sinatra::Base
     erb :'/wishedplaces/edit'
   end
 
+  patch '/destinations/wish/:id' do
+    @destination = WishedPlace.find_by_id(params[:id])
+    @destination.destination = params["destination"]
+    @destination.travel_by = params["travel_by"]
+    @destination.travel_partner = params["travel_partner"]
+    @destination.notes = params["notes"]
+    @destination.save
+    redirect "/destinations/wish/#{@destination.id}"
+  end
+
 end

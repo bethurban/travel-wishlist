@@ -1,0 +1,16 @@
+<h1><%= @destination.destination %></h1>
+
+<h3>Add more detail about this wishlist destination or update - then submit:</h3>
+
+<form action="/destinations/wish/<%= @destination.id%>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  *Destination name: <input type="text" name="destination" value="<%=@destination.destination%>">
+  <br>
+  Date you'd like to visit by - optional: <input type="date" name="travel_by" value="<%=@destination.travel_by%>">
+  <br>
+  Travel partner(s) - optional: <input type="text" name="travel_partner" value="<%=@destination.travel_partner%>">
+  <br>
+  Notes - optional: <input type="text" name="notes" value="<%=@destination.notes%>">
+  <br></br>
+  <input type="submit" value="submit">
+</form>
