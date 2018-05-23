@@ -68,6 +68,5 @@ PlacesWished - Destination - string, Travel by - datetime, travel partner - stri
 PlacesBeen - Destination - string, Date traveled - string, travel partner - string, notes - string, user_id - integer
 
 TO DO:
-- Make sure owner is logged in to edit or delete destinations.
 - Add flash messages where appropriate.
 - Bootstrap? CSS? Layout.erb?

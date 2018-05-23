@@ -3,6 +3,7 @@
 <h3>Your Travel Destination Wishlist</h3>
 <em>Check off your latest journey and log it!</em>
 <br></br>
+<% @wished_places.sort_by! { |place| place.destination } %>
 <form action="/destinations/update" method="post">
   <% @wished_places.each do |wish| %>
     <input type="checkbox" name="visited_place" value="<%=wish.destination%>"><a href="/destinations/wish/<%=wish.id%>"><%=wish.destination%></a></input>
@@ -18,6 +19,7 @@
 
 <h3>Places You've Been Around the World</h3>
 
+<% @visited_places.sort_by! { |place| place.destination } %>
 <ul>
   <% @visited_places.each do |visit| %>
     <li><a href="/destinations/<%= visit.id %>"><%= visit.destination %></a></li>
