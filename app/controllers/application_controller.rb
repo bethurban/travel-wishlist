@@ -21,7 +21,7 @@ class ApplicationController < Sinatra::Base
     if Helpers.logged_in?(session)
       redirect '/destinations'
     else
-      erb :'users/create_user'
+      erb :'/users/create_user'
     end
   end
 
@@ -40,7 +40,7 @@ class ApplicationController < Sinatra::Base
     if Helpers.logged_in?(session)
       redirect '/destinations'
     else
-      erb :'users/login'
+      erb :'/users/login'
     end
   end
 
@@ -64,10 +64,25 @@ class ApplicationController < Sinatra::Base
       @user = Helpers.current_user(session)
       @wished_places = WishedPlace.all
       @visited_places = VisitedPlace.all
-      erb :'destinations/destinations'
+      erb :'/destinations/destinations'
     else
       redirect '/'
     end
+  end
+
+  post '/destinations' do
+    @visit = VisitedPlace.new(destination: params["visited_place"])
+    @visit.user_id = session[:user_id]
+    @visit.save
+    if @visit.save
+      redirect '/destinations/edit'
+    else
+      redirect '/destinations'
+    end
+  end
+
+  get '/destinations/edit' do
+    erb :'/destinations/edit'
   end
 
 end
