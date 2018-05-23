@@ -63,8 +63,8 @@ class ApplicationController < Sinatra::Base
   get '/destinations' do
     if Helpers.logged_in?(session)
       @user = Helpers.current_user(session)
-      @wished_places = WishedPlace.all
-      @visited_places = VisitedPlace.all
+      @wished_places = WishedPlace.all.find_all { |place| place.user_id == @user.id }
+      @visited_places = VisitedPlace.all.find_all { |place| place.user_id == @user.id }
       erb :'/users/destinations'
     else
       redirect '/'
