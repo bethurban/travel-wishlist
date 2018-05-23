@@ -71,6 +71,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/destinations' do
+    WishedPlace.find_by_destination(params["visited_place"]).delete
     @visit = VisitedPlace.new(destination: params["visited_place"])
     @visit.user_id = session[:user_id]
     @visit.save
