@@ -173,4 +173,15 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  delete '/destinations/wish/:id/delete' do
+    @user = Helpers.current_user(session)
+    @destination = WishedPlace.find_by_id(params[:id])
+    if @user.id == @destination.user_id
+      @destination.delete
+      redirect '/destinations'
+    else
+      redirect '/destinations'
+    end
+  end
+
 end

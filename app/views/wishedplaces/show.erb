@@ -15,6 +15,11 @@
 <br></br>
 
 <a href="/destinations/wish/<%=@destination.id%>/edit">Edit this wishlist destination</a>
+<br>
+<form action='/destinations/<%= @destination.id %>/delete' method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete this destination">
+</form>
 
 <br></br>
 
