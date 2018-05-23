@@ -47,7 +47,6 @@ X '/signup' - sign up for account - users/create_user.erb
 X '/login' - log into account - users/login.erb
 X '/destinations' - user's homepage with checklist of places to go and list of places been
   - users/destinations.erb - user can check off place and submit to move it to list of places been
-'/:id/delete' - deletes destination or trip, posts to '/destinations'
 
 VISITED DESTINATIONS
 
@@ -55,11 +54,13 @@ X '/destinations/:id' - detail page on each visited destination - /visitedplaces
 X '/destinations/create' - add a visited destination - /visitedplaces/create.erb
 X  post to: '/destinations' - goes on list of 'been there'
 X '/destinations/:id/edit' - edit visited destination - visitedplaces/edit.erb
+X '/destinations/:id/delete' - deletes trip, posts to '/destinations'
 
 WISHED DESTINATIONS
 X '/destinations/wish/:id' - detail page on wished destination - /wishedplaces/show.erb
 X '/destinations/wish/create' - add wished destination - /wishedplaces/create.erb
 X '/destinations/wish/:id/edit' - edit wished destination /wishedplaces/edit.erb
+X '/destinations/wish/:id/delete' - deletes destination, posts to '/destinations'
 
 Tables:
 User - username - string, email - string, password_digest - string
@@ -67,8 +68,6 @@ PlacesWished - Destination - string, Travel by - datetime, travel partner - stri
 PlacesBeen - Destination - string, Date traveled - string, travel partner - string, notes - string, user_id - integer
 
 TO DO:
-- 'destinations/:id/delete' - deletes trip, posts to '/destinations'
-- '/destinations/wish/:id/delete' - deletes destination, posts to '/destinations'
 - Ability to move destination back to wishlist from visited
 - Fix date_traveled and travel_by - should have option to just choose year. Or choose date range. No time.
 - Make sure all appropriate routes can only be accessed if logged in.

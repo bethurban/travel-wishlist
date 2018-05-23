@@ -10,6 +10,11 @@
 
 <a href="/destinations/<%=@destination.id%>/edit">Edit this visited destination</a>
 <br>
+<form action='/destinations/wish' method='post'>
+<input type="checkbox" name="destination" value="<%=@destination.destination%>">
+<input type="submit" value="Move this destination back to your wishlist">
+</form>
+<br>
 <form action='/destinations/<%= @destination.id %>/delete' method="post">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" value="Delete this destination">

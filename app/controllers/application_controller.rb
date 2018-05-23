@@ -112,6 +112,9 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/destinations/wish' do
+    if VisitedPlace.find_by_destination(params["destination"])
+      VisitedPlace.find_by_destination(params["destination"]).delete
+    end
     @user = Helpers.current_user(session)
     @destination = WishedPlace.new(destination: params["destination"])
     @destination.user_id = @user.id
