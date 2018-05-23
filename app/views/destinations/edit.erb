@@ -1,1 +1,18 @@
-Edit destination
+<h1><%= @destination.destination %></h1>
+<br>
+<em>Nice work - you checked off a dream destination!</em>
+
+<br>
+
+<h3>Add more detail about your trip (optional) - then submit:</h3>
+
+<form action="/destinations/<%= @destination.id%>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  Date traveled: <input type="date" name="date_traveled">
+  <br>
+  Travel partner(s): <input type="text" name="travel_partner">
+  <br>
+  Notes: <input type="text" name="notes">
+  <br></br>
+  <input type="submit" value="submit">
+</form>
