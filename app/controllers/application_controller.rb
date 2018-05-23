@@ -50,7 +50,7 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = @user.id
       redirect "/destinations"
     else
-      redirect "/login"
+      redirect '/login'
     end
   end
 
@@ -60,7 +60,14 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/destinations' do
-    erb :'destinations/destinations'
+    if Helpers.logged_in?(session)
+      @user = Helpers.current_user(session)
+      @places_wished = PlacesWished.all
+      @places_been = PlacesBeen.all
+      erb :'destinations/destinations'
+    else
+      redirect '/'
+    end
   end
 
 end

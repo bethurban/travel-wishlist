@@ -1,1 +1,18 @@
-Destinations
+<h1>Welcome, <%= @user.username %></h1>
+
+<h3>Your Travel Destination Wishlist</h3>
+
+<% @places_wished.each do |place_wished| %>
+  <input type="checkbox" name="place_wished" value="<%=place_wished.id%>"><%=place_wished.destination%></input>
+<% end %>
+
+<br>
+
+<h3>Places You've Been Around the World</h3>
+
+<ul>
+  <% @places_been.each do |place_been| %>
+    <li><%= place_been.destination %></li>
+    <br>
+  <% end %>
+</ul>
