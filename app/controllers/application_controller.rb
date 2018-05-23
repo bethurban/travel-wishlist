@@ -121,7 +121,6 @@ class ApplicationController < Sinatra::Base
     @destination.user_id = @user.id
     @destination.save
     if @destination.save
-      @destination.travel_by = params["travel_by"]
       @destination.travel_partner = params["travel_partner"]
       @destination.notes = params["notes"]
       @destination.save
@@ -160,7 +159,6 @@ class ApplicationController < Sinatra::Base
   patch '/destinations/wish/:id' do
     @destination = WishedPlace.find_by_id(params[:id])
     @destination.destination = params["destination"]
-    @destination.travel_by = params["travel_by"]
     @destination.travel_partner = params["travel_partner"]
     @destination.notes = params["notes"]
     @destination.save

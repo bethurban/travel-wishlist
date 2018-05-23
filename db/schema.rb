@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180523185827) do
+ActiveRecord::Schema.define(version: 20180523203144) do
 
   create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
     t.string   "value"
@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(version: 20180523185827) do
 
   create_table "wished_places", force: :cascade do |t|
     t.string   "destination"
-    t.datetime "travel_by"
     t.string   "travel_partner"
     t.string   "notes"
     t.datetime "created_at",     null: false
