@@ -17,12 +17,16 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  post '/' do
-
+  get '/signup' do
+    if Helpers.logged_in?(session)
+      redirect '/destinations'
+    else
+      erb :'users/create_user'
+    end
   end
 
   get '/destinations' do
-    erb :destinations
+    erb :'destinations/destinations'
   end
 
 end
