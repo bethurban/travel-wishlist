@@ -2,8 +2,8 @@
 
 <h3>Your Travel Destination Wishlist</h3>
 
-<% @places_wished.each do |place_wished| %>
-  <input type="checkbox" name="place_wished" value="<%=place_wished.id%>"><%=place_wished.destination%></input>
+<% @wished_places.each do |wish| %>
+  <input type="checkbox" name="wished_place" value="<%=wish.id%>"><%=wish.destination%></input>
 <% end %>
 
 <br>
@@ -11,8 +11,8 @@
 <h3>Places You've Been Around the World</h3>
 
 <ul>
-  <% @places_been.each do |place_been| %>
-    <li><%= place_been.destination %></li>
+  <% @visited_places.each do |visit| %>
+    <li><%= visit.destination %></li>
     <br>
   <% end %>
 </ul>
