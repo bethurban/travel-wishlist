@@ -138,6 +138,7 @@ class ApplicationController < Sinatra::Base
     @destination.travel_partner = params["travel_partner"]
     @destination.notes = params["notes"]
     @destination.save
+    #binding.pry
     redirect "/destinations/#{@destination.id}"
   end
 

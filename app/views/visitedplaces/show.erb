@@ -1,11 +1,13 @@
 <h1><%= @destination.destination %></h1>
 
 
-<% date_split = params["date_traveled"].split("-") %>
-<% month_i = date_split[1].to_i %>
-<% month = Date::MONTHNAMES[month_i] %>
-<% year = date_split[0] %>
-<% date = "#{month} #{year}" %>
+<% if @destination.date_traveled %>
+  <% date_split = @destination.date_traveled.split("-") %>
+  <% month_i = date_split[1].to_i %>
+  <% month = Date::MONTHNAMES[month_i] %>
+  <% year = date_split[0] %>
+  <% date = "#{month} #{year}" %>
+<% end %>
 <h3>Travel date: <%= date %></h3>
 
 <h4>Travel partner(s): </h4><%= @destination.travel_partner %>
