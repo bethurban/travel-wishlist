@@ -84,16 +84,28 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/destinations/create' do
-    erb :'/visitedplaces/create'
+    if Helpers.logged_in?(session)
+      erb :'/visitedplaces/create'
+    else
+      redirect '/'
+    end
   end
 
   get '/destinations/wish/create' do
-    erb :'wishedplaces/create'
+    if Helpers.logged_in?(session)
+      erb :'wishedplaces/create'
+    else
+      redirect '/'
+    end
   end
 
   get '/destinations/:id/edit' do
-    @destination = VisitedPlace.find_by_id(params[:id])
-    erb :'/visitedplaces/edit'
+    if Helpers.logged_in?(session)
+      @destination = VisitedPlace.find_by_id(params[:id])
+      erb :'/visitedplaces/edit'
+    else
+      redirect '/'
+    end
   end
 
   post '/destinations' do
@@ -137,23 +149,34 @@ class ApplicationController < Sinatra::Base
     @destination.travel_partner = params["travel_partner"]
     @destination.notes = params["notes"]
     @destination.save
-    #binding.pry
     redirect "/destinations/#{@destination.id}"
   end
 
   get '/destinations/:id' do
-    @destination = VisitedPlace.find_by_id(params[:id])
-    erb :'/visitedplaces/show'
+    if Helpers.logged_in?(session)
+      @destination = VisitedPlace.find_by_id(params[:id])
+      erb :'/visitedplaces/show'
+    else
+      redirect '/'
+    end
   end
 
   get '/destinations/wish/:id' do
-    @destination = WishedPlace.find_by_id(params[:id])
-    erb :'/wishedplaces/show'
+    if Helpers.logged_in?(session)
+      @destination = WishedPlace.find_by_id(params[:id])
+      erb :'/wishedplaces/show'
+    else
+      redirect '/'
+    end
   end
 
   get '/destinations/wish/:id/edit' do
-    @destination = WishedPlace.find_by_id(params[:id])
-    erb :'/wishedplaces/edit'
+    if Helpers.logged_in?(session)
+      @destination = WishedPlace.find_by_id(params[:id])
+      erb :'/wishedplaces/edit'
+    else
+      redirect '/'
+    end
   end
 
   patch '/destinations/wish/:id' do
@@ -168,23 +191,23 @@ class ApplicationController < Sinatra::Base
   delete '/destinations/:id/delete' do
     @user = Helpers.current_user(session)
     @destination = VisitedPlace.find_by_id(params[:id])
-    if @user.id == @destination.user_id
-      @destination.delete
-      redirect '/destinations'
-    else
-      redirect '/destinations'
-    end
+      if @user.id == @destination.user_id
+        @destination.delete
+        redirect '/destinations'
+      else
+        redirect '/destinations'
+      end
   end
 
   delete '/destinations/wish/:id/delete' do
     @user = Helpers.current_user(session)
     @destination = WishedPlace.find_by_id(params[:id])
-    if @user.id == @destination.user_id
-      @destination.delete
-      redirect '/destinations'
-    else
-      redirect '/destinations'
-    end
+      if @user.id == @destination.user_id
+        @destination.delete
+        redirect '/destinations'
+      else
+        redirect '/destinations'
+      end
   end
 
 end

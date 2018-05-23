@@ -68,9 +68,6 @@ PlacesWished - Destination - string, Travel by - datetime, travel partner - stri
 PlacesBeen - Destination - string, Date traveled - string, travel partner - string, notes - string, user_id - integer
 
 TO DO:
-- Fix date_traveled and travel_by - should have option to just choose year. Or choose date range. No time.
-  <input type="date" name="date_traveled" value="<%=@destination.date_traveled%>">
-
 - Make sure all appropriate routes can only be accessed if logged in.
 - Add flash messages where appropriate.
 - Bootstrap? CSS? Layout.erb?
