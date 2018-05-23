@@ -36,6 +36,18 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/login' do
+    if Helpers.logged_in?(session)
+      redirect '/destinations'
+    else
+      erb :'users/login'
+    end
+  end
+
+  post '/login' do
+
+  end
+
   get '/destinations' do
     erb :'destinations/destinations'
   end
