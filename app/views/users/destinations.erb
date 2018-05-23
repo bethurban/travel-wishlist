@@ -3,7 +3,7 @@
 <h3>Your Travel Destination Wishlist</h3>
 <em>Check off your latest journey and submit!</em>
 <br></br>
-<form action="/destinations" method="post">
+<form action="/destinations/update" method="post">
   <% @wished_places.each do |wish| %>
     <input type="checkbox" name="visited_place" value="<%=wish.destination%>"><a href="/destinations/wish/<%=wish.id%>"><%=wish.destination%></a></input>
     <br>

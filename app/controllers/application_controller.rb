@@ -70,7 +70,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  post '/destinations' do
+  post '/destinations/update' do
     WishedPlace.find_by_destination(params["visited_place"]).delete
     @destination = VisitedPlace.new(destination: params["visited_place"])
     @destination.user_id = session[:user_id]
@@ -89,6 +89,22 @@ class ApplicationController < Sinatra::Base
   get '/destinations/:id/edit' do
     @destination = VisitedPlace.find_by_id(params[:id])
     erb :'/visitedplaces/edit'
+  end
+
+  post '/destinations' do
+    @user = Helpers.current_user(session)
+    @destination = VisitedPlace.new(destination: params["destination"])
+    @destination.user_id = @user.id
+    @destination.save
+    if @destination.save
+      @destination.date_traveled = params["date_traveled"]
+      @destination.travel_partner = params["travel_partner"]
+      @destination.notes = params["notes"]
+      @destination.save
+      redirect "/destinations/#{@destination.id}"
+    else
+      redirect '/destinations'
+    end
   end
 
   patch '/destinations/:id' do
