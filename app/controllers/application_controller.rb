@@ -95,4 +95,9 @@ class ApplicationController < Sinatra::Base
     redirect "/destinations/#{@destination.id}"
   end
 
+  get '/destinations/:id' do
+    @destination = VisitedPlace.find_by_id(params[:id])
+    erb :'/destinations/show'
+  end
+
 end
