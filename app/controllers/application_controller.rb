@@ -86,6 +86,10 @@ class ApplicationController < Sinatra::Base
     erb :'/visitedplaces/create'
   end
 
+  get '/destinations/wish/create' do
+    erb :'wishedplaces/create'
+  end
+
   get '/destinations/:id/edit' do
     @destination = VisitedPlace.find_by_id(params[:id])
     erb :'/visitedplaces/edit'
@@ -102,6 +106,22 @@ class ApplicationController < Sinatra::Base
       @destination.notes = params["notes"]
       @destination.save
       redirect "/destinations/#{@destination.id}"
+    else
+      redirect '/destinations'
+    end
+  end
+
+  post '/destinations/wish' do
+    @user = Helpers.current_user(session)
+    @destination = WishedPlace.new(destination: params["destination"])
+    @destination.user_id = @user.id
+    @destination.save
+    if @destination.save
+      @destination.travel_by = params["travel_by"]
+      @destination.travel_partner = params["travel_partner"]
+      @destination.notes = params["notes"]
+      @destination.save
+      redirect "/destinations/wish/#{@destination.id}"
     else
       redirect '/destinations'
     end
