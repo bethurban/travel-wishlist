@@ -64,7 +64,7 @@ class ApplicationController < Sinatra::Base
       @user = Helpers.current_user(session)
       @wished_places = WishedPlace.all
       @visited_places = VisitedPlace.all
-      erb :'/destinations/destinations'
+      erb :'/users/destinations'
     else
       redirect '/'
     end
@@ -72,19 +72,19 @@ class ApplicationController < Sinatra::Base
 
   post '/destinations' do
     WishedPlace.find_by_destination(params["visited_place"]).delete
-    @visit = VisitedPlace.new(destination: params["visited_place"])
-    @visit.user_id = session[:user_id]
-    @visit.save
-    if @visit.save
-      redirect '/destinations/edit'
+    @destination = VisitedPlace.new(destination: params["visited_place"])
+    @destination.user_id = session[:user_id]
+    @destination.save
+    if @destination.save
+      redirect "/destinations/#{@destination.id}/edit"
     else
       redirect '/destinations'
     end
   end
 
-  get '/destinations/edit' do
-    @destination = VisitedPlace.all.last
-    erb :'/destinations/edit'
+  get '/destinations/:id/edit' do
+    @destination = VisitedPlace.find_by_id(params[:id])
+    erb :'/visitedplaces/edit'
   end
 
   patch '/destinations/:id' do
@@ -98,7 +98,7 @@ class ApplicationController < Sinatra::Base
 
   get '/destinations/:id' do
     @destination = VisitedPlace.find_by_id(params[:id])
-    erb :'/destinations/show'
+    erb :'/visitedplaces/show'
     #Fill out show.erb. Need to add folder to views to separate out visited and wished routes?
   end
 
