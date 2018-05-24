@@ -36,6 +36,7 @@ class ApplicationController < Sinatra::Base
     if @user.save
       redirect '/destinations'
     else
+      flash[:message]= "You must include a username, email address, and password when signing up."
       redirect '/signup'
     end
   end
@@ -54,6 +55,7 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = @user.id
       redirect "/destinations"
     else
+      flash[:message]= "Your username and/or password is incorrect. Please try again."
       redirect '/login'
     end
   end
@@ -70,6 +72,7 @@ class ApplicationController < Sinatra::Base
       @visited_places = VisitedPlace.all.find_all { |place| place.user_id == @user.id }
       erb :'/users/destinations'
     else
+      flash[:message]= "Please log in."
       redirect '/'
     end
   end
@@ -93,6 +96,7 @@ class ApplicationController < Sinatra::Base
     if Helpers.logged_in?(session)
       erb :'/visitedplaces/create'
     else
+      flash[:message]= "Please log in."
       redirect '/'
     end
   end
@@ -101,6 +105,7 @@ class ApplicationController < Sinatra::Base
     if Helpers.logged_in?(session)
       erb :'wishedplaces/create'
     else
+      flash[:message]= "Please log in."
       redirect '/'
     end
   end
@@ -111,6 +116,7 @@ class ApplicationController < Sinatra::Base
     if Helpers.logged_in?(session) && @user.id == @destination.user_id
       erb :'/visitedplaces/edit'
     else
+      flash[:message]= "Please log in."
       redirect '/'
     end
   end
@@ -127,6 +133,7 @@ class ApplicationController < Sinatra::Base
       @destination.save
       redirect "/destinations/#{@destination.id}"
     else
+      flash[:message]= "You must include a destination name and date traveled. Please try again."
       redirect '/destinations'
     end
   end
@@ -145,6 +152,7 @@ class ApplicationController < Sinatra::Base
       @destination.save
       redirect "/destinations/wish/#{@destination.id}"
     else
+      flash[:message]= "You must include a destination name. Please try again."
       redirect '/destinations'
     end
   end
@@ -164,6 +172,7 @@ class ApplicationController < Sinatra::Base
       @destination = VisitedPlace.find_by_id(params[:id])
       erb :'/visitedplaces/show'
     else
+      flash[:message]= "Please log in."
       redirect '/'
     end
   end
@@ -173,6 +182,7 @@ class ApplicationController < Sinatra::Base
       @destination = WishedPlace.find_by_id(params[:id])
       erb :'/wishedplaces/show'
     else
+      flash[:message]= "Please log in."
       redirect '/'
     end
   end
@@ -183,6 +193,7 @@ class ApplicationController < Sinatra::Base
     if Helpers.logged_in?(session) && @user.id == @destination.user_id
       erb :'/wishedplaces/edit'
     else
+      flash[:message]= "Please log in."
       redirect '/'
     end
   end
@@ -201,6 +212,7 @@ class ApplicationController < Sinatra::Base
     @destination = VisitedPlace.find_by_id(params[:id])
       if @user.id == @destination.user_id
         @destination.delete
+        flash[:message]= "Destination deleted."
         redirect '/destinations'
       else
         redirect '/destinations'
@@ -212,6 +224,7 @@ class ApplicationController < Sinatra::Base
     @destination = WishedPlace.find_by_id(params[:id])
       if @user.id == @destination.user_id
         @destination.delete
+        flash[:message]= "Destination deleted."
         redirect '/destinations'
       else
         redirect '/destinations'

@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h1>Log into your account:</h1>
 <br>
 <form method="post" action="/login">

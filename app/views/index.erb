@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h1>Welcome to your Travel Wishlist and Tracker</h1>
 
 <a href="/signup">Sign Up</a>
