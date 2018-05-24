@@ -5,28 +5,34 @@
 <h1>Welcome, <%= @user.username %></h1>
 
 <h3>Your Travel Wishlist</h3>
-<em>Check off your latest journey and log it!</em>
-<br>
-<em>Still haven't made it? <a href="https://www.google.com/flights/" target="_blank">Get a move on!</a></em>
-<br></br>
-<% @wished_places.sort_by! { |place| place.destination } %>
-<form action="/destinations/update" method="post">
-  <% @wished_places.each do |wish| %>
-    <% timestamp = wish.created_at %>
-    <% timestamp = timestamp.to_s %>
-    <% date = timestamp.split(" ") %>
-    <% date = date[0].split("-") %>
-    <% month = date[1].to_i %>
-    <% month = Date::MONTHNAMES[month] %>
-    <% day = date[2] %>
-    <% year = date[0] %>
-    <input type="checkbox" name="visited_place" value="<%=wish.destination%>"><a href="/destinations/wish/<%=wish.id%>"><%=wish.destination%></a></input>
-     - Added to the list on <%= month %> <%= day %>, <%= year %>
-    <br>
-  <% end %>
+<% if @wished_places.empty? %>
+  <em>Get your wishlist started:</em>
   <br>
-  <input type="submit" value="Log trip">
-</form>
+<% else %>
+  <em>Check off your latest journey and log it!</em>
+  <br>
+  <em>Still haven't made it? <a href="https://www.google.com/flights/" target="_blank">Get a move on!</a></em>
+
+  <br></br>
+  <% @wished_places.sort_by! { |place| place.destination } %>
+  <form action="/destinations/update" method="post">
+    <% @wished_places.each do |wish| %>
+      <% timestamp = wish.created_at %>
+      <% timestamp = timestamp.to_s %>
+      <% date = timestamp.split(" ") %>
+      <% date = date[0].split("-") %>
+      <% month = date[1].to_i %>
+      <% month = Date::MONTHNAMES[month] %>
+      <% day = date[2] %>
+      <% year = date[0] %>
+    <input type="checkbox" name="visited_place" value="<%=wish.destination%>"><a href="/destinations/wish/<%=wish.id%>"><%=wish.destination%></a></input>
+    - Added to the list on <%= month %> <%= day %>, <%= year %>
+    <br>
+    <% end %>
+    <br>
+    <input type="submit" value="Log trip">
+  </form>
+<% end %>
 
 <br>
 <a href="/destinations/wish/create">Add a new destination to your wishlist</a>
@@ -34,16 +40,21 @@
 
 <h3>Places You've Been Around the World</h3>
 
-<% @visited_places.sort_by! { |place| place.date_traveled } %>
-<ul>
-  <% @visited_places.reverse.each do |visit| %>
-    <% traveldate = visit.date_traveled %>
-    <% dates = traveldate.split("-") %>
-    <% month = dates[1].to_i %>
-    <% month = Date::MONTHNAMES[month] %>
-    <% year = dates[0] %>
-    <li><a href="/destinations/<%= visit.id %>"><%= visit.destination %></a> - Visited in <%= month %> <%= year %></li>
-    <br>
-  <% end %>
-</ul>
+<% if @visited_places.empty? %>
+  <em>Add the places you've already been to:</em>
+  <br></br>
+<% else %>
+  <% @visited_places.sort_by! { |place| place.date_traveled } %>
+  <ul>
+    <% @visited_places.reverse.each do |visit| %>
+      <% traveldate = visit.date_traveled %>
+      <% dates = traveldate.split("-") %>
+      <% month = dates[1].to_i %>
+      <% month = Date::MONTHNAMES[month] %>
+      <% year = dates[0] %>
+      <li><a href="/destinations/<%= visit.id %>"><%= visit.destination %></a> - Visited in <%= month %> <%= year %></li>
+      <br>
+    <% end %>
+  </ul>
+<% end %>
 <a href="/destinations/create">Add a new visited destination</a>
