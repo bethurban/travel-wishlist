@@ -66,6 +66,3 @@ Tables:
 User - username - string, email - string, password_digest - string
 PlacesWished - Destination - string, Travel by - datetime, travel partner - string, notes - string, timestamp - timestamp, user_id - integer
 PlacesBeen - Destination - string, Date traveled - string, travel partner - string, notes - string, user_id - integer
-
-TO DO:
-- Add flash messages where appropriate.

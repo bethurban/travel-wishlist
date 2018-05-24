@@ -1,5 +1,15 @@
 <h1>On the wishlist: <%= @destination.destination %></h1>
 
+<% timestamp = @destination.created_at %>
+<% timestamp = timestamp.to_s %>
+<% date = timestamp.split(" ") %>
+<% date = date[0].split("-") %>
+<% month = date[1].to_i %>
+<% month = Date::MONTHNAMES[month] %>
+<% day = date[2] %>
+<% year = date[0] %>
+Added on <%=  month %> <%= day %>, <%= year %>
+
 <% if @destination.travel_partner %>
   <h4>Travel partner(s): </h4><%= @destination.travel_partner %>
 <% end %>

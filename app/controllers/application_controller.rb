@@ -82,7 +82,7 @@ class ApplicationController < Sinatra::Base
     @destination.save
 
     if @destination.save
-      flash[:message]= "Nice work - you checked off a dream destination!"
+      flash[:message]= "Awesome - you checked off a dream destination!"
       redirect "/destinations/#{@destination.id}/edit"
     else
       redirect '/destinations'
