@@ -69,4 +69,3 @@ PlacesBeen - Destination - string, Date traveled - string, travel partner - stri
 
 TO DO:
 - Add flash messages where appropriate.
-- Bootstrap? CSS? Layout.erb?

@@ -1,5 +1,7 @@
 require './config/environment'
 require 'date'
+require 'sinatra/base'
+require 'rack-flash'
 
 class ApplicationController < Sinatra::Base
 
@@ -8,6 +10,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "secret"
+    use Rack::Flash
   end
 
   get '/' do
@@ -75,8 +78,11 @@ class ApplicationController < Sinatra::Base
     WishedPlace.find_by_destination(params["visited_place"]).delete
     @destination = VisitedPlace.new(destination: params["visited_place"])
     @destination.user_id = session[:user_id]
+    @destination.date_traveled = "placeholder"
     @destination.save
+
     if @destination.save
+      flash[:message]= "Nice work - you checked off a dream destination!"
       redirect "/destinations/#{@destination.id}/edit"
     else
       redirect '/destinations'
