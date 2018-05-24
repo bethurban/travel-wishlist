@@ -21,7 +21,7 @@ Specs:
   Users must include a destination name for WishedPlace and must include a destination name and travel date for VisitedPlace.
 - [x] Display validation failures to user with error message (example form URL e.g. /posts/new)
   Added flash messages to inform users when forms are properly filled out, a post is deleted, or the user needs to log in.
-- [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+- [x] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
 
 Confirm
 - [x] You have a large number of small Git commits
