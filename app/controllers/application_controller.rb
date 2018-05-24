@@ -65,7 +65,6 @@ class ApplicationController < Sinatra::Base
       @user = Helpers.current_user(session)
       @wished_places = WishedPlace.all.find_all { |place| place.user_id == @user.id }
       @visited_places = VisitedPlace.all.find_all { |place| place.user_id == @user.id }
-      #binding.pry
       erb :'/users/destinations'
     else
       redirect '/'
@@ -114,9 +113,9 @@ class ApplicationController < Sinatra::Base
     @user = Helpers.current_user(session)
     @destination = VisitedPlace.new(destination: params["destination"])
     @destination.user_id = @user.id
+    @destination.date_traveled = params["date_traveled"]
     @destination.save
     if @destination.save
-      @destination.date_traveled = params["date_traveled"]
       @destination.travel_partner = params["travel_partner"]
       @destination.notes = params["notes"]
       @destination.save
