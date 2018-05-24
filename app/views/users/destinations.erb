@@ -28,10 +28,15 @@
 
 <h3>Places You've Been Around the World</h3>
 
-<% @visited_places.sort_by! { |place| place.destination } %>
+<% @visited_places.sort_by! { |place| place.date_traveled } %>
 <ul>
-  <% @visited_places.each do |visit| %>
-    <li><a href="/destinations/<%= visit.id %>"><%= visit.destination %></a></li>
+  <% @visited_places.reverse.each do |visit| %>
+    <% traveldate = visit.date_traveled %>
+    <% dates = traveldate.split("-") %>
+    <% month = dates[1].to_i %>
+    <% month = Date::MONTHNAMES[month] %>
+    <% year = dates[0] %>
+    <li><a href="/destinations/<%= visit.id %>"><%= visit.destination %></a> - Visited in <%= month %> <%= year %></li>
     <br>
   <% end %>
 </ul>
