@@ -1,6 +1,6 @@
 <h1>Welcome, <%= @user.username %></h1>
 
-<h3>Your Travel Destination Wishlist</h3>
+<h3>Your Travel Wishlist</h3>
 <em>Check off your latest journey and log it!</em>
 <br></br>
 <% @wished_places.sort_by! { |place| place.destination } %>
@@ -9,7 +9,7 @@
     <input type="checkbox" name="visited_place" value="<%=wish.destination%>"><a href="/destinations/wish/<%=wish.id%>"><%=wish.destination%></a></input>
     <br>
   <% end %>
-  <br></br>
+  <br>
   <input type="submit" value="Log trip">
 </form>
 
@@ -27,10 +27,3 @@
   <% end %>
 </ul>
 <a href="/destinations/create">Enter a new visited destination</a>
-
-<br></br>
-<br></br>
-
-<a href="/logout">Log out</a>
-
-<br></br>

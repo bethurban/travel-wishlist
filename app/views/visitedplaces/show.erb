@@ -15,21 +15,18 @@
 <h4>Notes: </h4><%= @destination.notes %>
 
 <br></br>
-
-<a href="/destinations/<%=@destination.id%>/edit">Edit this visited destination</a>
-<br></br>
+<form>
+  <input type="button" value="Edit this visited destination"
+  onclick="window.location.href='/destinations/<%=@destination.id%>/edit'"
+  />
+</form>
+<br>
 <form action='/destinations/wish' method='post'>
 <input type="hidden" name="destination" value="<%=@destination.destination%>">
 <input type="submit" value="Move this destination back to your wishlist">
 </form>
-<br>
+<br></br>
 <form action='/destinations/<%= @destination.id %>/delete' method="post">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" value="Delete this destination">
 </form>
-
-<br></br>
-
-<a href="/destinations">Back to homepage</a>
-<br>
-<a href="/logout">Log out</a>
