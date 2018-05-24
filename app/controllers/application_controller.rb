@@ -207,10 +207,16 @@ class ApplicationController < Sinatra::Base
   patch '/destinations/wish/:id' do
     @destination = WishedPlace.find_by_id(params[:id])
     @destination.destination = params["destination"]
-    @destination.travel_partner = params["travel_partner"]
-    @destination.notes = params["notes"]
     @destination.save
-    redirect "/destinations/wish/#{@destination.id}"
+    if @destination.save
+      @destination.travel_partner = params["travel_partner"]
+      @destination.notes = params["notes"]
+      @destination.save
+      redirect "/destinations/wish/#{@destination.id}"
+    else
+      flash[:message]= "You must enter a destination name. Please try again."
+      redirect "/destinations/wish/#{@destination.id}/edit"
+    end
   end
 
   delete '/destinations/:id/delete' do

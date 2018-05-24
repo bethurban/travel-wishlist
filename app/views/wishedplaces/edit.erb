@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h1><%= @destination.destination %></h1>
 
 <h3>Add more detail about this wishlist destination or update - then submit:</h3>
