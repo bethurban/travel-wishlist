@@ -6,7 +6,16 @@
 <% @wished_places.sort_by! { |place| place.destination } %>
 <form action="/destinations/update" method="post">
   <% @wished_places.each do |wish| %>
+    <% timestamp = wish.created_at %>
+    <% timestamp = timestamp.to_s %>
+    <% date = timestamp.split(" ") %>
+    <% date = date[0].split("-") %>
+    <% month = date[1].to_i %>
+    <% month = Date::MONTHNAMES[month] %>
+    <% day = date[2] %>
+    <% year = date[0] %>
     <input type="checkbox" name="visited_place" value="<%=wish.destination%>"><a href="/destinations/wish/<%=wish.id%>"><%=wish.destination%></a></input>
+     - Added to the list on <%= month %> <%= day %>, <%= year %>
     <br>
   <% end %>
   <br>
