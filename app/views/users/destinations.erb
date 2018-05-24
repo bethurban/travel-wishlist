@@ -2,6 +2,8 @@
 
 <h3>Your Travel Wishlist</h3>
 <em>Check off your latest journey and log it!</em>
+<br>
+<em>Still haven't made it? <a href="https://www.google.com/flights/" target="_blank">Get a move on!</a></em>
 <br></br>
 <% @wished_places.sort_by! { |place| place.destination } %>
 <form action="/destinations/update" method="post">
@@ -40,4 +42,4 @@
     <br>
   <% end %>
 </ul>
-<a href="/destinations/create">Enter a new visited destination</a>
+<a href="/destinations/create">Add a new visited destination</a>
