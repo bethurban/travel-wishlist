@@ -161,10 +161,16 @@ class ApplicationController < Sinatra::Base
     @destination = VisitedPlace.find_by_id(params[:id])
     @destination.destination = params["destination"]
     @destination.date_traveled = params["date_traveled"]
-    @destination.travel_partner = params["travel_partner"]
-    @destination.notes = params["notes"]
     @destination.save
-    redirect "/destinations/#{@destination.id}"
+    if @destination.save
+      @destination.travel_partner = params["travel_partner"]
+      @destination.notes = params["notes"]
+      @destination.save
+      redirect "/destinations/#{@destination.id}"
+    else
+      flash[:message]= "You must enter a destination name and date traveled. Please try again."
+      redirect "destinations/#{@destination.id}/edit"
+    end
   end
 
   get '/destinations/:id' do
