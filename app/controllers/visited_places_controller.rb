@@ -21,14 +21,9 @@ class VisitedPlacesController < ApplicationController
 
   post '/destinations' do
     @user = Helpers.current_user(session)
-    @destination = VisitedPlace.new(destination: params["destination"])
+    @destination = VisitedPlace.new(destination: params["destination"], date_traveled: params["date_traveled"], travel_partner: params["travel_partner"], notes: params["notes"])
     @destination.user_id = @user.id
-    @destination.date_traveled = params["date_traveled"]
-    @destination.save
     if @destination.save
-      @destination.travel_partner = params["travel_partner"]
-      @destination.notes = params["notes"]
-      @destination.save
       redirect "/destinations/#{@destination.id}"
     else
       flash[:message]= "You must include a destination name and date traveled. Please try again."

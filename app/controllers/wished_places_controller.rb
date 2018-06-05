@@ -13,13 +13,9 @@ class WishedPlacesController < ApplicationController
       VisitedPlace.find_by_destination(params["destination"]).delete
     end
     @user = Helpers.current_user(session)
-    @destination = WishedPlace.new(destination: params["destination"])
+    @destination = WishedPlace.new(destination: params["destination"], travel_partner: params["travel_partner"], notes: params["notes"])
     @destination.user_id = @user.id
-    @destination.save
     if @destination.save
-      @destination.travel_partner = params["travel_partner"]
-      @destination.notes = params["notes"]
-      @destination.save
       redirect "/destinations/wish/#{@destination.id}"
     else
       flash[:message]= "You must include a destination name. Please try again."
