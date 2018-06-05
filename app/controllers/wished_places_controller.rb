@@ -1,7 +1,7 @@
 class WishedPlacesController < ApplicationController
-  get '/destinations/wish/create' do
+  get '/destinations/wish/new' do
     if Helpers.logged_in?(session)
-      erb :'wishedplaces/create'
+      erb :'wishedplaces/new'
     else
       flash[:message]= "Please log in."
       redirect '/'

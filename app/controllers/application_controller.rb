@@ -25,7 +25,7 @@ class ApplicationController < Sinatra::Base
     if Helpers.logged_in?(session)
       redirect '/destinations'
     else
-      erb :'/users/create_user'
+      erb :'/users/new'
     end
   end
 
