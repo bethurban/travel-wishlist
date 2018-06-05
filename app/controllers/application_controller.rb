@@ -158,18 +158,18 @@ class ApplicationController < Sinatra::Base
   end
 
   patch '/destinations/:id' do
+    @user = Helpers.current_user(session)
     @destination = VisitedPlace.find_by_id(params[:id])
-    @destination.destination = params["destination"]
-    @destination.date_traveled = params["date_traveled"]
-    @destination.save
-    if @destination.save
-      @destination.travel_partner = params["travel_partner"]
-      @destination.notes = params["notes"]
-      @destination.save
-      redirect "/destinations/#{@destination.id}"
+    if Helpers.logged_in?(session) && @user.id == @destination.user_id
+      if @destination.update(destination: params["destination"], date_traveled: params["date_traveled"], travel_partner: params["travel_partner"], notes: params["notes"])
+        redirect "/destinations/#{@destination.id}"
+      else
+        flash[:message]= "You must enter a destination name and date traveled. Please try again."
+        redirect "destinations/#{@destination.id}/edit"
+      end
     else
-      flash[:message]= "You must enter a destination name and date traveled. Please try again."
-      redirect "destinations/#{@destination.id}/edit"
+      flash[:message]= "Please log in."
+      redirect '/'
     end
   end
 
@@ -205,17 +205,18 @@ class ApplicationController < Sinatra::Base
   end
 
   patch '/destinations/wish/:id' do
+    @user = Helpers.current_user(session)
     @destination = WishedPlace.find_by_id(params[:id])
-    @destination.destination = params["destination"]
-    @destination.save
-    if @destination.save
-      @destination.travel_partner = params["travel_partner"]
-      @destination.notes = params["notes"]
-      @destination.save
-      redirect "/destinations/wish/#{@destination.id}"
+    if Helpers.logged_in?(session) && @user.id == @destination.user_id
+      if @destination.update(destination: params["destination"], travel_partner: params["travel_partner"], notes: params["notes"])
+        redirect "/destinations/wish/#{@destination.id}"
+      else
+        flash[:message]= "You must enter a destination name. Please try again."
+        redirect "/destinations/wish/#{@destination.id}/edit"
+      end
     else
-      flash[:message]= "You must enter a destination name. Please try again."
-      redirect "/destinations/wish/#{@destination.id}/edit"
+      flash[:message]= "Please log in."
+      redirect '/'
     end
   end
 
